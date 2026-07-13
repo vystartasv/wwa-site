@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Works With Agents — MCP server and developer docs</title>
+<meta name="description" content="MCP server with 12 tools for UK tender bid compliance. Self-host or use the hosted API. Python, TypeScript, Go, Rust SDKs.">
+<link rel="canonical" href="https://workswithagents.dev/">
+<link rel="stylesheet" href="/static/wwa.css">
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/">Works With <span>Agents</span></a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="https://workswithagents.com">Product</a></li>
+        <li><a href="https://github.com/vystartasv/agent-tools">GitHub</a></li>
+        <li><a href="https://workswithagents.com/pricing/">Pricing</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main>
+  <section>
+    <div class="wrap">
+      <p class="kicker" style="margin-top:0">MCP Server</p>
+      <h1>Works With Agents — MCP Server</h1>
+      <p class="sub">MCP server with 12 tools for UK tender bid compliance, market scanning, and tender discovery. Open-source, self-hostable. Python, TypeScript, Go, Rust SDKs.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://workswithagents.com">Try the tools at workswithagents.com</a>
+        <a class="btn btn-secondary" href="https://github.com/vystartasv/agent-tools">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+  <section class="agents">
+    <div class="wrap">
+      <h2>Quick start</h2>
+      <pre><span class="c"># Proxy mode (hosted API)</span>
+docker run -p 3100:3100 ghcr.io/vystartasv/agent-tools:mcp
+
+<span class="c"># Direct mode (offline, your key)</span>
+docker run -e GROQ_API_KEY=*** -p 3101:3101 ghcr.io/vystartasv/agent-tools:mcp-direct
+
+<span class="c"># Any MCP client</span>
+GET  /mcp/tools        <span class="c">list all 12 tools</span>
+POST /mcp/tools/call   <span class="c">invoke a tool</span></pre>
+      <p style="margin-top:16px"><a href="https://github.com/vystartasv/agent-tools">Full documentation on GitHub →</a></p>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap"><span>Works With Agents</span><span><a href="https://github.com/vystartasv/agent-tools">GitHub</a> &middot; <a href="mailto:hello@workswithagents.com">hello@workswithagents.com</a></span></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,29 @@
+# Works With Agents
+> Free UK tender and bid compliance tools. MCP server with 12 tools.
+
+https://workswithagents.com/ — Bid compliance toolkit
+https://workswithagents.com/trust/ — Trust and compliance
+https://workswithagents.com/pricing/ — Pricing
+https://workswithagents.com/sectors/construction-fm/ — Construction FM
+https://workswithagents.com/sectors/digital-it/ — Digital IT
+https://workswithagents.com/sectors/health-care/ — Health and care
+https://workswithagents.com/sectors/grants/ — Grants
+
+## MCP server
+https://github.com/vystartasv/agent-tools — Source code and docs
+docker run -p 3100:3100 ghcr.io/vystartasv/agent-tools:mcp — Proxy mode
+docker run -e GROQ_API_KEY=*** -p 3101:3101 ghcr.io/vystartasv/agent-tools:mcp-direct — Direct mode
+
+## Tools (12)
+- BidCheck (/tools/rfp/) — Find every mandatory requirement you have missed in an ITT
+- SQ / PQQ Check (/tools/pqq/) — Plan Selection Questionnaire answers with evidence
+- GrantCheck (/tools/grant/) — Meet every funder guideline
+- ESGCheck (/tools/esg/) — Check ESG statements against standards
+- BidMate (/tools/bidnobid/) — Decide bid or no-bid on evidence
+- TimelineCheck (/tools/timeline/) — Pull every deadline and clarification date
+- WinThesis (/tools/winthesis/) — Build win themes from award criteria
+- ScoreCheck (/tools/score/) — See how evaluators will score your answer
+- PlainCheck (/tools/plain/) — Cut jargon for evaluators
+- PriceCheck (/tools/price/) — Validate pricing schedule
+- RiskCheck (/tools/risk/) — Spot auto-renewals and one-sided clauses
+- ObligCheck (/tools/obligations/) — List every contract obligation

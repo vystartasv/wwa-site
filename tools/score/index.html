@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScoreCheck — See how evaluators will score your answer, criterion by criterion. | Works With Agents</title>
+<meta name="description" content="See how evaluators will score your answer, criterion by criterion.">
+<link rel="canonical" href="https://workswithagents.com/tools/score/">
+<link rel="stylesheet" href="/static/wwa.css">
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/">Works With <span>Agents</span></a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="/#tools">Tools</a></li>
+        <li><a href="/#sectors">Sectors</a></li>
+        <li><a href="/#agents">For agents</a></li>
+        <li><a href="/trust/">Trust</a></li>
+        <li><a href="/pricing/">Pricing</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main>
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">ScoreCheck</p>
+      <h2>See how evaluators will score your answer, criterion by criterion.</h2>
+      <p class="lede">Use when: you need to check compliance before submitting.</p>
+      <div style="margin:24px 0">
+        <label for="input-text" style="font-size:14px;font-weight:600;display:block;margin-bottom:8px">Paste your draft response:</label>
+        <textarea id="input-text" rows="8" style="width:100%;padding:12px;border:1px solid var(--rule);border-radius:var(--radius);background:var(--card);color:var(--ink);font-family:var(--body);font-size:14px;resize:vertical"></textarea>
+        <button id="submit-btn" class="btn btn-primary" style="margin-top:12px" onclick="runAnalysis()">Run check</button>
+        <button id="copy-btn" class="btn btn-secondary" style="margin-top:12px;margin-left:8px;display:none" onclick="copyReport()">Copy report</button>
+      </div>
+      <div id="results"></div>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap"><span>Works With Agents</span><span><a href="https://workswithagents.dev">Docs</a> &middot; <a href="https://github.com/vystartasv/agent-tools">GitHub</a> &middot; <a href="mailto:hello@workswithagents.com">hello@workswithagents.com</a></span></div>
+</footer>
+<script src="/static/wwa.js"></script>
+<script>
+async function runAnalysis() {
+  const text = document.getElementById("input-text").value.trim();
+  if (!text) return;
+  document.getElementById("submit-btn").disabled = true;
+  document.getElementById("submit-btn").textContent = "Analysing...";
+  try {
+    const data = await callTool("score", text);
+    const container = document.getElementById("results");
+    renderReport(data.analysis || data, container);
+    document.getElementById("copy-btn").style.display = "inline-block";
+  } catch (e) {
+    document.getElementById("results").innerHTML = `<p style="color:var(--fail)">Error: ${e.message}</p>`;
+  }
+  document.getElementById("submit-btn").disabled = false;
+  document.getElementById("submit-btn").textContent = "Run check";
+}
+
+</script>
+</body>
+</html>
