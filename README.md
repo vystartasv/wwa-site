@@ -61,6 +61,14 @@ This rsyncs all files to the VPS, fixes permissions, updates nginx config, and r
 bash verify.sh
 ```
 
+## Distribution — MCP registry listings
+
+| Registry | URL |
+|----------|-----|
+| Official MCP Registry | `io.github.vystartasv/wwa-mcp` |
+| Smithery | `https://smithery.ai/servers/vystartasv/wwa-mcp` |
+| PulseMCP | Auto-ingests from official registry within a week |
+
 ## Rules
 - FRONTEND IS FROZEN after acceptance. No changes without naming exact files.
 - "Improve the look/UX" is not a valid instruction.

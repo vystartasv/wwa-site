@@ -1,0 +1,126 @@
+:root{
+    --paper:#FAF8F3; --card:#FFFFFF; --ink:#1C1C1A; --ink-2:#54524B;
+    --rule:#D8D5CB; --rule-soft:#E9E6DD;
+    --pass:#0F6E56; --pass-bg:#E8F2EE; --fail:#A32D2D; --fail-bg:#F7EAEA;
+    --display:"Fraunces",Georgia,serif; --body:"Public Sans",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+    --max:1080px; --radius:6px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#161512; --card:#1E1D19; --ink:#EDEBE4; --ink-2:#A9A69B;
+      --rule:#3A382F; --rule-soft:#2A2822;
+      --pass:#5CBFA3; --pass-bg:#1C2B26; --fail:#D98C8C; --fail-bg:#2E2020;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{transition:none!important} }
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+  a{color:inherit}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  ul{list-style:none}
+  :focus-visible{outline:2px solid var(--pass);outline-offset:2px}
+
+  /* Header */
+  header{border-bottom:1px solid var(--rule);position:sticky;top:0;background:var(--paper);z-index:10}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .brand{font-family:var(--display);font-size:18px;font-weight:600;text-decoration:none}
+  .brand span{color:var(--pass)}
+  .nav ul{display:flex;gap:22px;font-size:14px}
+  .nav a:not(.brand){text-decoration:none;color:var(--ink-2)}
+  .nav a:not(.brand):hover{color:var(--ink)}
+  @media(max-width:760px){ .nav ul{display:none} }
+
+  /* Hero */
+  .hero{padding:72px 0 56px;border-bottom:1px solid var(--rule)}
+  .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+  @media(max-width:860px){ .hero .wrap{grid-template-columns:1fr} }
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--pass);margin-bottom:16px}
+  h1{font-family:var(--display);font-weight:600;font-size:clamp(34px,5vw,52px);line-height:1.08;letter-spacing:-.01em;margin-bottom:16px}
+  .sub{font-size:18px;color:var(--ink-2);max-width:44ch;margin-bottom:28px}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  .btn{display:inline-block;padding:12px 22px;border-radius:var(--radius);font-size:15px;font-weight:600;text-decoration:none;border:1px solid transparent}
+  .btn-primary{background:var(--ink);color:var(--paper)}
+  .btn-primary:hover{background:var(--pass);color:#fff}
+  .btn-secondary{border-color:var(--rule);color:var(--ink);background:var(--card)}
+  .btn-secondary:hover{border-color:var(--ink)}
+  .cta-tertiary{font-size:14px;color:var(--ink-2);text-decoration:underline;text-underline-offset:3px}
+  .hero-note{margin-top:20px;font-size:13px;color:var(--ink-2)}
+
+  /* Signature: the report card */
+  .report{background:var(--card);border:1px solid var(--rule);border-radius:8px;box-shadow:0 1px 0 var(--rule);overflow:hidden}
+  .report-head{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--rule-soft)}
+  .report-head .t{font-family:var(--mono);font-size:12px;color:var(--ink-2)}
+  .verdict{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fail);border:1.5px solid var(--fail);border-radius:3px;padding:3px 8px;transform:rotate(-2deg)}
+  .report-body{padding:8px 18px 14px;font-size:14px}
+  .row{display:flex;gap:10px;padding:8px 0;border-bottom:1px dashed var(--rule-soft);align-items:baseline}
+  .row:last-child{border-bottom:0}
+  .mark{font-family:var(--mono);font-weight:500;flex:0 0 16px}
+  .ok .mark{color:var(--pass)} .gap .mark{color:var(--fail)}
+  .row .clause{font-family:var(--mono);font-size:12px;color:var(--ink-2);margin-left:auto;white-space:nowrap}
+  .report-foot{padding:10px 18px;background:var(--paper);border-top:1px solid var(--rule-soft);font-size:12px;color:var(--ink-2);display:flex;justify-content:space-between}
+  .report-foot b{color:var(--pass)}
+
+  /* Sections */
+  section{padding:64px 0;border-bottom:1px solid var(--rule)}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin-bottom:10px}
+  h2{font-family:var(--display);font-weight:600;font-size:clamp(24px,3.4vw,32px);margin-bottom:8px}
+  .lede{color:var(--ink-2);max-width:60ch;margin-bottom:36px}
+
+  /* Questions (workflows) */
+  .questions{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:860px){ .questions{grid-template-columns:1fr} }
+  .q{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:10px}
+  .q h3{font-family:var(--display);font-size:20px;font-weight:600;line-height:1.25}
+  .q .time{font-family:var(--mono);font-size:12px;color:var(--pass)}
+  .q p{font-size:14px;color:var(--ink-2);flex:1}
+  .q a{font-size:14px;font-weight:600;text-decoration:none;color:var(--ink);border-bottom:2px solid var(--pass);width:max-content;padding-bottom:1px}
+
+  /* Tools by stage */
+  .stage{margin-bottom:36px}
+  .stage:last-child{margin-bottom:0}
+  .stage-head{display:flex;align-items:baseline;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:8px;margin-bottom:16px}
+  .stage-head .n{font-family:var(--mono);font-size:12px;color:var(--ink-2)}
+  .stage-head h3{font-family:var(--display);font-size:20px;font-weight:600}
+  .tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+  .tool{background:var(--card);border:1px solid var(--rule);border-radius:var(--radius);padding:16px;text-decoration:none;display:flex;flex-direction:column;gap:6px;position:relative}
+  .tool:hover{border-color:var(--ink)}
+  .tool .name{font-weight:600;font-size:15px}
+  .tool .use{font-size:13.5px;color:var(--ink-2);line-height:1.5}
+  .tool .mini{font-family:var(--mono);font-size:11px;margin-top:6px}
+  .mini .p{color:var(--pass)} .mini .f{color:var(--fail);margin-left:10px}
+  .tool.flagship{border:1.5px solid var(--pass)}
+  .badge{position:absolute;top:-9px;right:12px;background:var(--pass);color:#fff;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:3px}
+
+  /* Sectors */
+  .sectors{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+  .sector{border:1px solid var(--rule);border-left:3px solid var(--pass);border-radius:var(--radius);padding:18px;background:var(--card);text-decoration:none}
+  .sector h3{font-family:var(--display);font-size:17px;font-weight:600;margin-bottom:4px}
+  .sector p{font-size:13.5px;color:var(--ink-2)}
+
+  /* Agents */
+  .agents{background:var(--card)}
+  .agents .cols{display:grid;grid-template-columns:1fr 1fr;gap:36px}
+  @media(max-width:860px){ .agents .cols{grid-template-columns:1fr} }
+  .agents p{color:var(--ink-2);font-size:15px;margin-bottom:14px}
+  pre{background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:12.5px;line-height:1.7;padding:18px;border-radius:8px;overflow-x:auto}
+  @media (prefers-color-scheme: dark){ pre{background:#0D0C0A;border:1px solid var(--rule)} }
+  pre .c{opacity:.55}
+
+  /* Trust */
+  .trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:32px}
+  .trust-item{border-top:2px solid var(--pass);padding-top:12px}
+  .trust-item h3{font-size:15px;font-weight:600;margin-bottom:4px}
+  .trust-item p{font-size:13.5px;color:var(--ink-2)}
+
+  /* Pricing + capture */
+  .price-line{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:24px}
+  .price-line .free{font-family:var(--display);font-size:22px;font-weight:600}
+  .price-line .soon{font-size:14px;color:var(--ink-2)}
+  .price-line .soon b{color:var(--ink)}
+
+  footer{padding:32px 0;font-size:13px;color:var(--ink-2)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}
+  footer a{color:var(--ink-2)}
+  footer a:hover{color:var(--ink)}
