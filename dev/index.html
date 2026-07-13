@@ -3,54 +3,442 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Works With Agents — MCP server and developer docs</title>
-<meta name="description" content="MCP server with 12 tools for UK tender and bid compliance. Open-source, self-hostable.">
+<title>Works With Agents — MCP Server for UK Tender Compliance</title>
+<meta name="description" content="MCP server with 12 tools for UK tender and bid compliance. Docker images, SDKs, and full tool reference.">
 <link rel="canonical" href="https://workswithagents.dev/">
+<link rel="alternate" type="application/json" href="/dev/tools.json">
 <link rel="stylesheet" href="/static/wwa.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body.dev-appendix {}
+.dev-appendix h1, .dev-appendix h2, .dev-appendix h3 { font-family: var(--mono); letter-spacing: -0.02em; }
+.dev-appendix h2 { font-size: 20px; font-weight: 600; margin: 32px 0 8px; padding-bottom: 4px; border-bottom: 1px solid var(--rule); }
+.dev-appendix .kicker { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--pass); }
+.dev-appendix .section-intro { font-size: 14px; color: var(--ink-2); margin-bottom: 20px; max-width: 72ch; }
+.dev-appendix table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.dev-appendix th, .dev-appendix td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--rule-soft); vertical-align: top; }
+.dev-appendix th { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-2); }
+.dev-appendix code { font-family: var(--mono); font-size: 13px; background: var(--rule-soft); padding: 1px 5px; border-radius: 3px; }
+.dev-appendix pre { font-family: var(--mono); font-size: 13px; line-height: 1.5; background: var(--card); border: 1px solid var(--rule); border-radius: var(--radius); padding: 16px; overflow-x: auto; }
+.dev-appendix .req { color: var(--fail); }
+.dev-appendix .type { font-size: 11px; color: var(--ink-2); font-family: var(--mono); }
+
+/* Tabs */
+.tabs { display: flex; gap: 0; border-bottom: 1px solid var(--rule); margin-bottom: 0; }
+.tab-label { padding: 10px 18px; font-family: var(--mono); font-size: 13px; cursor: pointer; border: 1px solid transparent; border-bottom: none; margin-bottom: -1px; color: var(--ink-2); }
+.tab-label:hover { color: var(--ink); }
+.tab-radio { display: none; }
+.tab-radio:checked + .tab-label { border-color: var(--rule); background: var(--card); color: var(--ink); font-weight: 500; }
+.tab-content { display: none; border: 1px solid var(--rule); border-top: none; padding: 20px; background: var(--card); }
+.tab-radio:checked + .tab-label + .tab-content { display: block; }
+.tab-radio:checked + .tab-label + .tab-content + .tab-radio + .tab-label + .tab-content { display: none; }
+
+/* Tool entries */
+.tool-entry { border: 1px solid var(--rule-soft); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 10px; }
+.tool-header { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.tool-name { font-family: var(--mono); font-weight: 600; font-size: 15px; }
+.tool-path { font-size: 12px; color: var(--ink-2); }
+.tool-desc { font-size: 14px; color: var(--ink-2); margin-bottom: 8px; line-height: 1.5; }
+.args-table { font-size: 13px; margin: 8px 0; }
+.args-table th { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-2); }
+.args-table td { padding: 6px 10px; border-bottom: 1px solid var(--rule-soft); vertical-align: top; }
+.arg-name code { font-weight: 500; }
+.no-args { font-style: italic; color: var(--ink-2); padding: 8px; }
+.example-box { margin-top: 10px; }
+.example-label { font-family: var(--mono); font-size: 11px; color: var(--ink-2); margin-bottom: 4px; }
+details summary { cursor: pointer; font-family: var(--mono); font-size: 12px; color: var(--ink-2); }
+details summary:hover { color: var(--ink); }
+
+/* Agent readability */
+.agent-links { display: flex; gap: 16px; flex-wrap: wrap; margin: 12px 0; }
+.agent-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 13px; padding: 8px 14px; border: 1px solid var(--rule); border-radius: var(--radius); text-decoration: none; }
+.agent-link:hover { border-color: var(--ink); }
+</style>
 </head>
-<body>
+<body class="dev-appendix">
+
 <header>
-  <div class="wrap nav">
-    <a class="brand" href="/">Works With <span>Agents</span></a>
-    <nav aria-label="Main">
-      <ul>
-        <li><a href="https://workswithagents.com">Product</a></li>
-        <li><a href="https://github.com/vystartasv/agent-tools">GitHub</a></li>
-        <li><a href="https://workswithagents.com/pricing/">Pricing</a></li>
-      </ul>
-    </nav>
-  </div>
+<div class="wrap nav">
+  <a class="brand" href="https://workswithagents.com">Works With <span>Agents</span></a>
+  <nav aria-label="Main">
+    <ul>
+      <li><a href="https://workswithagents.com">Product</a></li>
+      <li><a href="https://workswithagents.com/pricing/">Pricing</a></li>
+      <li><a href="/">MCP Server</a></li>
+      <li><a href="https://github.com/vystartasv/agent-tools">GitHub</a></li>
+    </ul>
+  </nav>
+</div>
 </header>
-<main>
-  <section>
-    <div class="wrap">
-      <p class="kicker" style="margin-top:0">MCP Server</p>
-      <h1>Works With Agents — MCP Server</h1>
-      <p class="sub">MCP server with 12 tools for UK tender and bid compliance. Open-source, self-hostable.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="https://workswithagents.com">Try the tools at workswithagents.com</a>
-        <a class="btn btn-secondary" href="https://github.com/vystartasv/agent-tools">View on GitHub</a>
+
+<main class="wrap">
+
+<section>
+  <p class="kicker">MCP Server</p>
+  <h1>12 UK tender compliance tools, one MCP server</h1>
+  <p class="section-intro">A Model Context Protocol server that gives AI agents access to 12 tools for UK tender and bid compliance — RFP analysis, PQQ planning, ESG validation, pricing checks, and more. <a href="https://workswithagents.com">Product &amp; pricing on .com →</a></p>
+</section>
+
+<section>
+  <h2 id="quickstart">Quick start</h2>
+  <p class="section-intro">Run the server locally, then connect any MCP-compatible agent (Claude, Cursor, Copilot, etc.).</p>
+
+  <div class="tabs">
+    <input type="radio" name="tabs" id="tab-docker" class="tab-radio" checked>
+    <label for="tab-docker" class="tab-label">Docker (proxy mode)</label>
+    <div class="tab-content">
+      <p style="font-size:14px;margin-bottom:8px">Proxies analysis requests through tools.workswithagents.com. Quickest setup — no API key needed.</p>
+      <pre>docker run -p 3000:3000 ghcr.io/vystartasv/agent-tools:latest</pre>
+      <p style="font-size:13px;color:var(--ink-2);margin-top:6px">Point your agent to <code>http://localhost:3000/mcp</code></p>
+    </div>
+
+    <input type="radio" name="tabs" id="tab-docker-direct" class="tab-radio">
+    <label for="tab-docker-direct" class="tab-label">Docker (direct mode)</label>
+    <div class="tab-content">
+      <p style="font-size:14px;margin-bottom:8px">Run the analysis models locally. Requires a Groq API key.</p>
+      <pre>docker run -p 3000:3000 -e GROQ_API_KEY=your_key ghcr.io/vystartasv/agent-tools:direct</pre>
+      <p style="font-size:13px;color:var(--ink-2);margin-top:6px">Set <code>GROQ_API_KEY</code> to your Groq Cloud API key</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 id="tools">Tool reference</h2>
+  <p class="section-intro">All 12 tools exposed by the MCP server. Each includes its arguments schema and example call format.</p>
+
+    <div class="tool-entry" id="tool-bidcheck">
+      <div class="tool-header">
+        <span class="tool-name">bidcheck</span>
+        <code class="tool-path">rfp</code>
       </div>
+      <p class="tool-desc">RFP / tender compliance analyzer. Paste a procurement specification and optionally your draft response to get a structured gap analysis showing covered, partial, and missing requirements with compliance score.</p>
+      <details>
+        <summary>Arguments &amp; usage</summary>
+        <table class="args-table">
+          <thead><tr><th>Argument</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+        <tr><td class="arg-name"><code>spec_text</code> <span class="req">*</span></td><td><span class="type">string</span></td><td>The procurement specification / RFP text to analyze for requirements (required, min 10 chars)</td></tr>
+        <tr><td class="arg-name"><code>draft_text</code></td><td><span class="type">string</span></td><td>Optional draft response text to check against the specification</td></tr>
+          </tbody>
+        </table>
+        <div class="example-box">
+          <p class="example-label">Example MCP call</p>
+          <pre>{
+  "name": "bidcheck",
+  "arguments": {
+    "spec_text": ""
+}
+}</pre>
+        </div>
+      </details>
     </div>
-  </section>
-  <section class="agents">
-    <div class="wrap">
-      <h2>Quick start</h2>
-      <pre><span class="c"># Proxy mode (hosted API)</span>
-docker run -p 3100:3100 ghcr.io/vystartasv/agent-tools:mcp
-
-<span class="c"># Direct mode (offline, your key)</span>
-docker run -e GROQ_API_KEY=*** -p 3101:3101 ghcr.io/vystartasv/agent-tools:mcp-direct
-
-<span class="c"># Any MCP client</span>
-GET  /mcp/tools        <span class="c">list all 12 tools</span>
-POST /mcp/tools/call   <span class="c">invoke a tool</span></pre>
-      <p style="margin-top:16px"><a href="https://github.com/vystartasv/agent-tools">Full documentation on GitHub →</a></p>
+    <div class="tool-entry" id="tool-plaincheck">
+      <div class="tool-header">
+        <span class="tool-name">plaincheck</span>
+        <code class="tool-path">plain</code>
+      </div>
+      <p class="tool-desc">Plain-English readability grader. Analyze business or procurement text for jargon density, sentence length, passive voice, and get a readability score with actionable suggestions.</p>
+      <details>
+        <summary>Arguments &amp; usage</summary>
+        <table class="args-table">
+          <thead><tr><th>Argument</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+        <tr><td class="arg-name"><code>text</code> <span class="req">*</span></td><td><span class="type">string</span></td><td>The text to analyze for readability and plain-English quality (required, min 20 chars)</td></tr>
+          </tbody>
+        </table>
+        <div class="example-box">
+          <p class="example-label">Example MCP call</p>
+          <pre>{
+  "name": "plaincheck",
+  "arguments": {
+    "text": ""
+}
+}</pre>
+        </div>
+      </details>
     </div>
-  </section>
+    <div class="tool-entry" id="tool-timelinecheck">
+      <div class="tool-header">
+        <span class="tool-name">timelinecheck</span>
+        <code class="tool-path">timeline</code>
+      </div>
+      <p class="tool-desc">Tender timeline extractor. Paste any tender, ITT, or RFP document and get all dates, deadlines, and milestones extracted into a structured timeline with priority ratings.</p>
+      <details>
+        <summary>Arguments &amp; usage</summary>
+        <table class="args-table">
+          <thead><tr><th>Argument</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+        <tr><td class="arg-name"><code>text</code> <span class="req">*</span></td><td><span class="type">string</span></td><td>The tender/ITT/RFP document text to extract dates and deadlines from (required, min 20 chars)</td></tr>
+          </tbody>
+        </table>
+        <div class="example-box">
+          <p class="example-label">Example MCP call</p>
+          <pre>{
+  "name": "timelinecheck",
+  "arguments": {
+    "text": ""
+}
+}</pre>
+        </div>
+      </details>
+    </div>
+    <div class="tool-entry" id="tool-scorecheck">
+      <div class="tool-header">
+        <span class="tool-name">scorecheck</span>
+        <code class="tool-path">score</code>
+      </div>
+      <p class="tool-desc">Bid score simulator. Provide your RFP scoring matrix and draft response to estimate how your bid would score against each criterion, with confidence ratings and improvement tips.</p>
+      <details>
+        <summary>Arguments &amp; usage</summary>
+        <table class="args-table">
+          <thead><tr><th>Argument</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+        <tr><td class="arg-name"><code>matrix_text</code> <span class="req">*</span></td><td><span class="type">string</span></td><td>The scoring matrix / evaluation criteria from the RFP (required, min 20 chars)</td></tr>
+        <tr><td class="arg-name"><code>response_text</code> <span class="req">*</span></td><td><span class="type">string</span></td><td>Your draft response text to evaluate against the scoring matrix (required, min 20 chars)</td></tr>
+          </tbody>
+        </table>
+        <div class="example-box">
+          <p class="example-label">Example MCP call</p>
+          <pre>{
+  "name": "scorecheck",
+  "arguments": {
+    "matrix_text": "",
+    "response_text": ""
+}
+}</pre>
+        </div>
+      </details>
+    </div>
+    <div class="tool-entry" id="tool-obligcheck">
+      <div class="tool-header">
+        <span class="tool-name">obligcheck</span>
+        <code class="tool-path">obligations</code>
+      </div>
+      <p class="tool-desc">Contract obligation tracker. Paste a signed contract and get all ongoing obligations, reporting requirements, deadlines, and risk ratings extracted and organized.</p>
+      <details>
+        <summary>Arguments &amp; usage</summary>
+        <table class="args-table">
+          <thead><tr><th>Argument</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+        <tr><td class="arg-name"><code>text</code> <span class="req">*</span></td><td><span class="type">string</span></td><td>The contract text to analyze for obligations and compliance requirements (required, min 20 chars)</td></tr>
+          </tbody>
+        </table>
+        <div class="example-box">
+          <p class="example-label">Example MCP call</p>
+          <pre>{
+  "name": "obligcheck",
+  "arguments": {
+    "text": ""
+}
+}</pre>
+        </div>
+      </details>
+    </div>
+    <div class="tool-entry" id="tool-pqqcheck">
+      <div class="tool-header">
+        <span class="tool-name">pqqcheck</span>
+        <code class="tool-path">pqq</code>
+      </div>
+      <p class="tool-desc">PQQ question planner. Extract every question from a Pre-Qualification Questionnaire, categorize them, and get evidence preparation suggestions for each.</p>
+      <details>
+        <summary>Arguments &amp; usage</summary>
+        <table class="args-table">
+          <thead><tr><th>Argument</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+        <tr><td class="arg-name"><code>text</code> <span class="req">*</span></td><td><span class="type">string</span></td><td>The PQQ document text to extract questions from (required, min 20 chars)</td></tr>
+        <tr><td class="arg-name"><code>profile</code></td><td><span class="type">string</span></td><td>Optional company profile text to personalize evidence suggestions</td></tr>
+          </tbody>
+        </table>
+        <div class="example-box">
+          <p class="example-label">Example MCP call</p>
+          <pre>{
+  "name": "pqqcheck",
+  "arguments": {
+    "text": ""
+}
+}</pre>
+        </div>
+      </details>
+    </div>
+    <div class="tool-entry" id="tool-esgcheck">
+      <div class="tool-header">
+        <span class="tool-name">esgcheck</span>
+        <code class="tool-path">esg</code>
+      </div>
+      <p class="tool-desc">ESG statement validator. Check sustainability and ESG claims against GRI, SASB, and TCFD frameworks. Flags greenwashing risks and missing metrics.</p>
+      <details>
+        <summary>Arguments &amp; usage</summary>
+        <table class="args-table">
+          <thead><tr><th>Argument</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+        <tr><td class="arg-name"><code>text</code> <span class="req">*</span></td><td><span class="type">string</span></td><td>The ESG / sustainability statement text to validate (required, min 20 chars)</td></tr>
+          </tbody>
+        </table>
+        <div class="example-box">
+          <p class="example-label">Example MCP call</p>
+          <pre>{
+  "name": "esgcheck",
+  "arguments": {
+    "text": ""
+}
+}</pre>
+        </div>
+      </details>
+    </div>
+    <div class="tool-entry" id="tool-bidmate">
+      <div class="tool-header">
+        <span class="tool-name">bidmate</span>
+        <code class="tool-path">bidnobid</code>
+      </div>
+      <p class="tool-desc">Bid / No-Bid decision tool. Evaluate a tender opportunity against scored factors including strategic fit, competition, margin, capability, and timeline for a go/no-go recommendation.</p>
+      <details>
+        <summary>Arguments &amp; usage</summary>
+        <table class="args-table">
+          <thead><tr><th>Argument</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+        <tr><td class="arg-name"><code>text</code> <span class="req">*</span></td><td><span class="type">string</span></td><td>The opportunity summary text describing the tender/bid opportunity (required, min 30 chars)</td></tr>
+          </tbody>
+        </table>
+        <div class="example-box">
+          <p class="example-label">Example MCP call</p>
+          <pre>{
+  "name": "bidmate",
+  "arguments": {
+    "text": ""
+}
+}</pre>
+        </div>
+      </details>
+    </div>
+    <div class="tool-entry" id="tool-riskcheck">
+      <div class="tool-header">
+        <span class="tool-name">riskcheck</span>
+        <code class="tool-path">risk</code>
+      </div>
+      <p class="tool-desc">Contract risk assessor. Analyze any contract for risky clauses — onerous terms, hidden liabilities, auto-renewal traps, unfavorable indemnities, and termination risks.</p>
+      <details>
+        <summary>Arguments &amp; usage</summary>
+        <table class="args-table">
+          <thead><tr><th>Argument</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+        <tr><td class="arg-name"><code>text</code> <span class="req">*</span></td><td><span class="type">string</span></td><td>The contract text to analyze for risky clauses and terms (required, min 20 chars)</td></tr>
+          </tbody>
+        </table>
+        <div class="example-box">
+          <p class="example-label">Example MCP call</p>
+          <pre>{
+  "name": "riskcheck",
+  "arguments": {
+    "text": ""
+}
+}</pre>
+        </div>
+      </details>
+    </div>
+    <div class="tool-entry" id="tool-winthesis">
+      <div class="tool-header">
+        <span class="tool-name">winthesis</span>
+        <code class="tool-path">winthesis</code>
+      </div>
+      <p class="tool-desc">Win theme builder. Take evaluation criteria from an RFP and your differentiators to generate structured win themes with proof points, evidence, and narrative hooks.</p>
+      <details>
+        <summary>Arguments &amp; usage</summary>
+        <table class="args-table">
+          <thead><tr><th>Argument</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+        <tr><td class="arg-name"><code>text</code> <span class="req">*</span></td><td><span class="type">string</span></td><td>The evaluation criteria from the RFP or tender (required, min 20 chars)</td></tr>
+        <tr><td class="arg-name"><code>differentiators</code></td><td><span class="type">string</span></td><td>Optional text describing your company's differentiators, strengths, and unique capabilities</td></tr>
+          </tbody>
+        </table>
+        <div class="example-box">
+          <p class="example-label">Example MCP call</p>
+          <pre>{
+  "name": "winthesis",
+  "arguments": {
+    "text": ""
+}
+}</pre>
+        </div>
+      </details>
+    </div>
+    <div class="tool-entry" id="tool-grantcheck">
+      <div class="tool-header">
+        <span class="tool-name">grantcheck</span>
+        <code class="tool-path">grant</code>
+      </div>
+      <p class="tool-desc">Grant application checker. Compare your grant application against the grant guidelines section by section, flagging gaps and suggesting improvements.</p>
+      <details>
+        <summary>Arguments &amp; usage</summary>
+        <table class="args-table">
+          <thead><tr><th>Argument</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+        <tr><td class="arg-name"><code>text</code> <span class="req">*</span></td><td><span class="type">string</span></td><td>Your grant application text to check (required, min 20 chars)</td></tr>
+        <tr><td class="arg-name"><code>guidelines</code></td><td><span class="type">string</span></td><td>Optional grant guidelines / criteria text to check the application against</td></tr>
+          </tbody>
+        </table>
+        <div class="example-box">
+          <p class="example-label">Example MCP call</p>
+          <pre>{
+  "name": "grantcheck",
+  "arguments": {
+    "text": ""
+}
+}</pre>
+        </div>
+      </details>
+    </div>
+    <div class="tool-entry" id="tool-pricecheck">
+      <div class="tool-header">
+        <span class="tool-name">pricecheck</span>
+        <code class="tool-path">price</code>
+      </div>
+      <p class="tool-desc">Pricing schedule validator. Check your pricing schedule for anomalies, above-cap items, missing rates, arithmetic errors, and inconsistencies.</p>
+      <details>
+        <summary>Arguments &amp; usage</summary>
+        <table class="args-table">
+          <thead><tr><th>Argument</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+        <tr><td class="arg-name"><code>text</code> <span class="req">*</span></td><td><span class="type">string</span></td><td>The pricing schedule text to validate (required, min 20 chars)</td></tr>
+        <tr><td class="arg-name"><code>instructions</code></td><td><span class="type">string</span></td><td>Optional pricing instructions or constraints to validate against</td></tr>
+          </tbody>
+        </table>
+        <div class="example-box">
+          <p class="example-label">Example MCP call</p>
+          <pre>{
+  "name": "pricecheck",
+  "arguments": {
+    "text": ""
+}
+}</pre>
+        </div>
+      </details>
+    </div>
+</section>
+
+<section>
+  <h2 id="agents">Agent access</h2>
+  <p class="section-intro">Machine-readable files for LLMs and AI agents to discover and use the MCP server automatically.</p>
+  <div class="agent-links">
+    <a class="agent-link" href="/llms.txt">📄 llms.txt</a>
+    <a class="agent-link" href="/dev/tools.json">🔧 Tool manifest (JSON)</a>
+  </div>
+  <p style="font-size:13px;color:var(--ink-2)">The tool manifest is also linked from the page head for automatic discovery.</p>
+</section>
+
 </main>
-<footer>
-  <div class="wrap"><span>Works With Agents</span><span><a href="https://github.com/vystartasv/agent-tools">GitHub</a> &middot; <a href="mailto:hello@workswithagents.com">hello@workswithagents.com</a></span></div>
+
+<footer style="border-top:1px solid var(--rule);padding:24px 0;margin-top:48px;font-size:13px;color:var(--ink-2)">
+<div class="wrap" style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between">
+  <span>Works With Agents · MCP Server</span>
+  <span>
+    <a href="https://github.com/vystartasv/agent-tools">GitHub</a> ·
+    <a href="https://workswithagents.com">workswithagents.com</a> ·
+    <a href="mailto:hello@workswithagents.com">hello@workswithagents.com</a>
+  </span>
+</div>
 </footer>
+
 </body>
 </html>

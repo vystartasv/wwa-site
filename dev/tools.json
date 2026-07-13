@@ -1,0 +1,180 @@
+{
+  "meta": {
+    "server": "Works With Agents MCP Server",
+    "description": "MCP server with 12 tools for UK tender and bid compliance",
+    "docs_url": "https://workswithagents.dev",
+    "homepage": "https://workswithagents.com",
+    "tool_count": 12
+  },
+  "tools": [
+    {
+      "name": "bidcheck",
+      "description": "RFP / tender compliance analyzer. Paste a procurement specification and optionally your draft response to get a structured gap analysis showing covered, partial, and missing requirements with compliance score.",
+      "workerPath": "rfp",
+      "arguments": {
+        "spec_text": {
+          "type": "string",
+          "description": "The procurement specification / RFP text to analyze for requirements (required, min 10 chars)",
+          "required": true
+        },
+        "draft_text": {
+          "type": "string",
+          "description": "Optional draft response text to check against the specification"
+        }
+      }
+    },
+    {
+      "name": "plaincheck",
+      "description": "Plain-English readability grader. Analyze business or procurement text for jargon density, sentence length, passive voice, and get a readability score with actionable suggestions.",
+      "workerPath": "plain",
+      "arguments": {
+        "text": {
+          "type": "string",
+          "description": "The text to analyze for readability and plain-English quality (required, min 20 chars)",
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "timelinecheck",
+      "description": "Tender timeline extractor. Paste any tender, ITT, or RFP document and get all dates, deadlines, and milestones extracted into a structured timeline with priority ratings.",
+      "workerPath": "timeline",
+      "arguments": {
+        "text": {
+          "type": "string",
+          "description": "The tender/ITT/RFP document text to extract dates and deadlines from (required, min 20 chars)",
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "scorecheck",
+      "description": "Bid score simulator. Provide your RFP scoring matrix and draft response to estimate how your bid would score against each criterion, with confidence ratings and improvement tips.",
+      "workerPath": "score",
+      "arguments": {
+        "matrix_text": {
+          "type": "string",
+          "description": "The scoring matrix / evaluation criteria from the RFP (required, min 20 chars)",
+          "required": true
+        },
+        "response_text": {
+          "type": "string",
+          "description": "Your draft response text to evaluate against the scoring matrix (required, min 20 chars)",
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "obligcheck",
+      "description": "Contract obligation tracker. Paste a signed contract and get all ongoing obligations, reporting requirements, deadlines, and risk ratings extracted and organized.",
+      "workerPath": "obligations",
+      "arguments": {
+        "text": {
+          "type": "string",
+          "description": "The contract text to analyze for obligations and compliance requirements (required, min 20 chars)",
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "pqqcheck",
+      "description": "PQQ question planner. Extract every question from a Pre-Qualification Questionnaire, categorize them, and get evidence preparation suggestions for each.",
+      "workerPath": "pqq",
+      "arguments": {
+        "text": {
+          "type": "string",
+          "description": "The PQQ document text to extract questions from (required, min 20 chars)",
+          "required": true
+        },
+        "profile": {
+          "type": "string",
+          "description": "Optional company profile text to personalize evidence suggestions"
+        }
+      }
+    },
+    {
+      "name": "esgcheck",
+      "description": "ESG statement validator. Check sustainability and ESG claims against GRI, SASB, and TCFD frameworks. Flags greenwashing risks and missing metrics.",
+      "workerPath": "esg",
+      "arguments": {
+        "text": {
+          "type": "string",
+          "description": "The ESG / sustainability statement text to validate (required, min 20 chars)",
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "bidmate",
+      "description": "Bid / No-Bid decision tool. Evaluate a tender opportunity against scored factors including strategic fit, competition, margin, capability, and timeline for a go/no-go recommendation.",
+      "workerPath": "bidnobid",
+      "arguments": {
+        "text": {
+          "type": "string",
+          "description": "The opportunity summary text describing the tender/bid opportunity (required, min 30 chars)",
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "riskcheck",
+      "description": "Contract risk assessor. Analyze any contract for risky clauses \u2014 onerous terms, hidden liabilities, auto-renewal traps, unfavorable indemnities, and termination risks.",
+      "workerPath": "risk",
+      "arguments": {
+        "text": {
+          "type": "string",
+          "description": "The contract text to analyze for risky clauses and terms (required, min 20 chars)",
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "winthesis",
+      "description": "Win theme builder. Take evaluation criteria from an RFP and your differentiators to generate structured win themes with proof points, evidence, and narrative hooks.",
+      "workerPath": "winthesis",
+      "arguments": {
+        "text": {
+          "type": "string",
+          "description": "The evaluation criteria from the RFP or tender (required, min 20 chars)",
+          "required": true
+        },
+        "differentiators": {
+          "type": "string",
+          "description": "Optional text describing your company's differentiators, strengths, and unique capabilities"
+        }
+      }
+    },
+    {
+      "name": "grantcheck",
+      "description": "Grant application checker. Compare your grant application against the grant guidelines section by section, flagging gaps and suggesting improvements.",
+      "workerPath": "grant",
+      "arguments": {
+        "text": {
+          "type": "string",
+          "description": "Your grant application text to check (required, min 20 chars)",
+          "required": true
+        },
+        "guidelines": {
+          "type": "string",
+          "description": "Optional grant guidelines / criteria text to check the application against"
+        }
+      }
+    },
+    {
+      "name": "pricecheck",
+      "description": "Pricing schedule validator. Check your pricing schedule for anomalies, above-cap items, missing rates, arithmetic errors, and inconsistencies.",
+      "workerPath": "price",
+      "arguments": {
+        "text": {
+          "type": "string",
+          "description": "The pricing schedule text to validate (required, min 20 chars)",
+          "required": true
+        },
+        "instructions": {
+          "type": "string",
+          "description": "Optional pricing instructions or constraints to validate against"
+        }
+      }
+    }
+  ]
+}

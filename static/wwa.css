@@ -22,6 +22,26 @@
   ul{list-style:none}
   :focus-visible{outline:2px solid var(--pass);outline-offset:2px}
 
+  /* ── dev appendix variant ────────────────────── */
+  .dev-appendix h1{font-family:var(--mono);letter-spacing:-.02em}
+  .dev-appendix h2{font-family:var(--mono);font-size:20px;font-weight:600;margin:32px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--rule);letter-spacing:-.02em}
+  .dev-appendix .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--pass)}
+  .dev-appendix .section-intro{font-size:14px;color:var(--ink-2);margin-bottom:20px;max-width:72ch}
+  .dev-appendix code{font-family:var(--mono);font-size:13px;background:var(--rule-soft);padding:1px 5px;border-radius:3px}
+  .dev-appendix pre{font-family:var(--mono);font-size:13px;line-height:1.5;background:var(--card);border:1px solid var(--rule);border-radius:var(--radius);padding:16px;overflow-x:auto}
+  .dev-appendix table{width:100%;border-collapse:collapse;font-size:13px}
+  .dev-appendix th,.dev-appendix td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+  .dev-appendix th{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-2)}
+  .dev-appendix .tabs{display:flex;gap:0;border-bottom:1px solid var(--rule)}
+  .dev-appendix .tab-label{padding:10px 18px;font-family:var(--mono);font-size:13px;cursor:pointer;border:1px solid transparent;border-bottom:none;margin-bottom:-1px;color:var(--ink-2)}
+  .dev-appendix .tab-radio{display:none}
+  .dev-appendix .tab-radio:checked+.tab-label{border-color:var(--rule);background:var(--card);color:var(--ink);font-weight:500}
+  .dev-appendix .tab-content{display:none;border:1px solid var(--rule);border-top:none;padding:20px;background:var(--card)}
+  .dev-appendix .tab-radio:checked+.tab-label+.tab-content{display:block}
+  .dev-appendix .agent-links{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0}
+  .dev-appendix .agent-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:13px;padding:8px 14px;border:1px solid var(--rule);border-radius:var(--radius);text-decoration:none}
+  .dev-appendix .agent-link:hover{border-color:var(--ink)}
+
   /* Header */
   header{border-bottom:1px solid var(--rule);position:sticky;top:0;background:var(--paper);z-index:10}
   .nav{display:flex;align-items:center;justify-content:space-between;height:60px}
