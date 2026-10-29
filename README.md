@@ -1,4 +1,6 @@
-# wwa-site — static site for Works With Agents
+# wwa-site — legacy static site for Works With Agents
+
+> The current [Works With Agents](https://workswithagents.com) site offers independent engineering assessments. This repository contains the earlier static site for UK procurement tools; it is not the source of the current `.com` website.
 
 ## What this is
 Pure static HTML site. No build step, no frameworks, no bundlers.
